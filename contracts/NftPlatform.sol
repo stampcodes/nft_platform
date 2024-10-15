@@ -12,12 +12,29 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard {
     uint256 private tokenIdCounter;
     mapping(uint256 => string) private _tokenURIs;
     mapping(uint256 => uint256) nftPrices;
+    struct Auction {
+        address payable seller;
+        uint256 highestBid;
+        address payable highestBidder;
+        bool isActive;
+        uint256 endTime;
+        mapping(address => uint256) bids;
+        address[] bidders;
+        mapping(address => bool) isBidder;
+    }
+    mapping(uint256 => Auction) public auctions;
 
     event NFTPurchased(
         address indexed buyer,
         address indexed seller,
         uint256 tokenId,
         uint256 price
+    );
+
+    event AuctionCreated(
+        address indexed seller,
+        uint256 indexed tokenId,
+        uint256 auctionEndTime
     );
 
     constructor(
@@ -103,5 +120,25 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard {
             payable(msg.sender).transfer(excess);
         }
         emit NFTPurchased(msg.sender, currentNftOwner, _tokenId, nftPrice);
+    }
+
+    function createAuction(uint256 _tokenId, uint256 _auctionDuration) public {
+        require(msg.sender == ownerOf(_tokenId), "You are not the NFT owner");
+        require(
+            _auctionDuration >= 1 hours,
+            "Auction duration must be at least 1 hour"
+        );
+        require(
+            !auctions[_tokenId].isActive,
+            "Auction already exists for this token"
+        );
+        Auction storage newAuction = auctions[_tokenId];
+        newAuction.seller = payable(msg.sender);
+        newAuction.highestBid = 0;
+        newAuction.highestBidder = payable(address(0));
+        newAuction.isActive = true;
+        newAuction.endTime = block.timestamp + _auctionDuration;
+        safeTransferFrom(msg.sender, address(this), _tokenId);
+        emit AuctionCreated(msg.sender, _tokenId, newAuction.endTime);
     }
 }
