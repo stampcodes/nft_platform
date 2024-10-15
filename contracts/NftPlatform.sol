@@ -191,6 +191,14 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard {
         return auctions[_tokenId].bidders;
     }
 
+    function getBid(
+        uint256 _tokenId,
+        address _bidder
+    ) public view returns (uint256) {
+        Auction storage auction = auctions[_tokenId];
+        return auction.bids[_bidder];
+    }
+
     function endAuction(uint256 _tokenId) public nonReentrant {
         Auction storage auction = auctions[_tokenId];
         require(auction.isActive, "Auction is already ended");
