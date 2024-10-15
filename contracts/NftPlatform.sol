@@ -75,7 +75,7 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard {
         for (uint256 i = 0; i < totalNftSupply; i++) {
             tokenIdCounter++;
             uint256 currentTokenId = tokenIdCounter;
-            _safeMint(address(this), currentTokenId);
+            _safeMint(msg.sender, currentTokenId);
             string memory newTokenURI = string(
                 abi.encodePacked(
                     baseURI,
@@ -98,6 +98,7 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard {
     }
 
     function setNftPrice(uint256 _tokenId, uint256 _nftPrice) public onlyOwner {
+        require(msg.sender == ownerOf(_tokenId), "You are not the NFT owner");
         require(_nftPrice > 0, "Price must be greater than zero");
         nftPrices[_tokenId] = _nftPrice * 1 ether;
     }
