@@ -221,7 +221,6 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard, IERC721Receiver {
         require(auction.isActive, "Auction is already ended");
         auction.isActive = false;
         if (auction.highestBidder != address(0)) {
-            auction.bids[auction.highestBidder] = 0;
             _transfer(address(this), auction.highestBidder, _tokenId);
         }
         _clearAuction(_tokenId);
