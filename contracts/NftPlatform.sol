@@ -223,31 +223,9 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard, IERC721Receiver {
         if (auction.highestBidder != address(0)) {
             auction.bids[auction.highestBidder] = 0;
             _transfer(address(this), auction.highestBidder, _tokenId);
-            auction.seller.transfer(auction.highestBid);
         }
+        _clearAuction(_tokenId);
         emit AuctionEnded(auction.highestBidder, _tokenId, auction.highestBid);
-    }
-
-    function withdrawBid(uint256 _tokenId) public nonReentrant {
-        Auction storage auction = auctions[_tokenId];
-        uint256 amount = auction.bids[msg.sender];
-        require(amount > 0, "No funds to withdraw");
-        auction.bids[msg.sender] = 0;
-        payable(msg.sender).transfer(amount);
-        emit BidWithdrawn(msg.sender, _tokenId, amount);
-        for (uint256 i = 0; i < auction.bidders.length; i++) {
-            if (auction.bidders[i] == msg.sender) {
-                auction.bidders[i] = auction.bidders[
-                    auction.bidders.length - 1
-                ];
-                auction.bidders.pop();
-                break;
-            }
-        }
-        if (auction.bidders.length == 0) {
-            delete auction.bids[msg.sender];
-            _clearAuction(_tokenId);
-        }
     }
 
     function _clearAuction(uint256 _tokenId) internal {
@@ -259,17 +237,5 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard, IERC721Receiver {
             delete auction.bids[auction.bidders[i]];
         }
         delete auction.bidders;
-    }
-
-    function withdrawBidByOwner(
-        uint256 _tokenId,
-        address _bidder
-    ) public onlyOwner {
-        Auction storage auction = auctions[_tokenId];
-        uint256 amount = auction.bids[_bidder];
-        require(amount > 0, "No funds to withdraw");
-        auction.bids[_bidder] = 0;
-        payable(_bidder).transfer(amount);
-        emit BidWithdrawnByOwner(_bidder, _tokenId, amount);
     }
 }
