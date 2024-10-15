@@ -238,4 +238,10 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard, IERC721Receiver {
         }
         delete auction.bidders;
     }
+
+    function withdraw() public payable onlyOwner {
+        uint256 contractBalance = address(this).balance;
+        require(contractBalance > 0, "No funds to withdraw");
+        payable(owner()).transfer(contractBalance);
+    }
 }
