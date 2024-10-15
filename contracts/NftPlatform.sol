@@ -5,8 +5,9 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 
-contract NftPlatform is ERC721, Ownable, ReentrancyGuard {
+contract NftPlatform is ERC721, Ownable, ReentrancyGuard, IERC721Receiver {
     string private baseURI;
     uint256 private totalNftSupply = 20;
     uint256 private tokenIdCounter;
@@ -65,6 +66,15 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard {
         string memory _baseURI
     ) ERC721("Quantum Mad Labs", "QML") Ownable(msg.sender) {
         baseURI = _baseURI;
+    }
+
+    function onERC721Received(
+        address /*operator*/,
+        address /*from*/,
+        uint256 /*tokenId*/,
+        bytes memory /*data*/
+    ) public pure override returns (bytes4) {
+        return this.onERC721Received.selector;
     }
 
     function setBaseURI(string memory _newBaseURI) public onlyOwner {
