@@ -137,9 +137,11 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard, IERC721Receiver {
     }
 
     function purchaseNft(uint256 _tokenId) public payable nonReentrant {
-        address currentNftOwner = ownerOf(_tokenId);
-        require(ownerOf(_tokenId) != address(0), "Token does not exist");
-        require(msg.sender != currentNftOwner, "NFT is already yours");
+        require(
+            ownerOf(_tokenId) == address(this),
+            "Contract does not own the NFT"
+        );
+        require(msg.sender != ownerOf(_tokenId), "NFT is already yours");
         require(
             msg.value >= nftPrices[_tokenId],
             "Enter the correct amount of Ether"
@@ -147,12 +149,11 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard, IERC721Receiver {
         uint256 nftPrice = nftPrices[_tokenId];
         uint256 excess = msg.value - nftPrice;
         nftPrices[_tokenId] = 0;
-        safeTransferFrom(currentNftOwner, msg.sender, _tokenId);
-        payable(currentNftOwner).transfer(nftPrice);
+        transferFrom(address(this), msg.sender, _tokenId);
         if (excess > 0) {
             payable(msg.sender).transfer(excess);
         }
-        emit NFTPurchased(msg.sender, currentNftOwner, _tokenId, nftPrice);
+        emit NFTPurchased(msg.sender, address(this), _tokenId, nftPrice);
     }
 
     function createAuction(uint256 _tokenId, uint256 _auctionDuration) public {
