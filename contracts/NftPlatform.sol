@@ -149,15 +149,21 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard, IERC721Receiver {
         uint256 nftPrice = nftPrices[_tokenId];
         uint256 excess = msg.value - nftPrice;
         nftPrices[_tokenId] = 0;
-        transferFrom(address(this), msg.sender, _tokenId);
+        _transfer(address(this), msg.sender, _tokenId);
         if (excess > 0) {
             payable(msg.sender).transfer(excess);
         }
         emit NFTPurchased(msg.sender, address(this), _tokenId, nftPrice);
     }
 
-    function createAuction(uint256 _tokenId, uint256 _auctionDuration) public {
-        require(msg.sender == ownerOf(_tokenId), "You are not the NFT owner");
+    function createAuction(
+        uint256 _tokenId,
+        uint256 _auctionDuration
+    ) public onlyOwner {
+        require(
+            ownerOf(_tokenId) == address(this),
+            "Contract does not own the NFT"
+        );
         require(
             _auctionDuration >= 1 hours,
             "Auction duration must be at least 1 hour"
@@ -167,12 +173,12 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard, IERC721Receiver {
             "Auction already exists for this token"
         );
         Auction storage newAuction = auctions[_tokenId];
-        newAuction.seller = payable(msg.sender);
+        newAuction.seller = payable(address(this));
         newAuction.highestBid = 0;
         newAuction.highestBidder = payable(address(0));
         newAuction.isActive = true;
         newAuction.endTime = block.timestamp + _auctionDuration;
-        safeTransferFrom(msg.sender, address(this), _tokenId);
+
         emit AuctionCreated(msg.sender, _tokenId, newAuction.endTime);
     }
 
