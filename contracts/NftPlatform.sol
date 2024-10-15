@@ -13,6 +13,13 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard {
     mapping(uint256 => string) private _tokenURIs;
     mapping(uint256 => uint256) nftPrices;
 
+    event NFTPurchased(
+        address indexed buyer,
+        address indexed seller,
+        uint256 tokenId,
+        uint256 price
+    );
+
     constructor(
         string memory _baseURI
     ) ERC721("Quantum Mad Labs", "QML") Ownable(msg.sender) {
@@ -77,5 +84,24 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard {
             }
         }
         return nftsForSale;
+    }
+
+    function purchaseNft(uint256 _tokenId) public payable nonReentrant {
+        address currentNftOwner = ownerOf(_tokenId);
+        require(ownerOf(_tokenId) != address(0), "Token does not exist");
+        require(msg.sender != currentNftOwner, "NFT is already yours");
+        require(
+            msg.value >= nftPrices[_tokenId],
+            "Enter the correct amount of Ether"
+        );
+        uint256 nftPrice = nftPrices[_tokenId];
+        uint256 excess = msg.value - nftPrice;
+        nftPrices[_tokenId] = 0;
+        safeTransferFrom(currentNftOwner, msg.sender, _tokenId);
+        payable(currentNftOwner).transfer(nftPrice);
+        if (excess > 0) {
+            payable(msg.sender).transfer(excess);
+        }
+        emit NFTPurchased(msg.sender, currentNftOwner, _tokenId, nftPrice);
     }
 }
