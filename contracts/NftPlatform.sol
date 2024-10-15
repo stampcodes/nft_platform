@@ -97,7 +97,7 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard {
         return _tokenURIs[tokenId];
     }
 
-    function setNftPrice(uint256 _tokenId, uint256 _nftPrice) public {
+    function setNftPrice(uint256 _tokenId, uint256 _nftPrice) public onlyOwner {
         require(msg.sender == ownerOf(_tokenId), "You are not the NFT owner");
         require(_nftPrice > 0, "Price must be greater than zero");
         nftPrices[_tokenId] = _nftPrice * 1 ether;
@@ -197,6 +197,7 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard {
         require(auction.isActive, "Auction is already ended");
         auction.isActive = false;
         if (auction.highestBidder != address(0)) {
+            auction.bids[auction.highestBidder] = 0;
             safeTransferFrom(address(this), auction.highestBidder, _tokenId);
             auction.seller.transfer(auction.highestBid);
         } else {
