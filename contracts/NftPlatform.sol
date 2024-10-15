@@ -37,6 +37,30 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard {
         uint256 auctionEndTime
     );
 
+    event BidPlaced(
+        address indexed bidder,
+        uint256 indexed tokenId,
+        uint256 bidAmount
+    );
+
+    event AuctionEnded(
+        address indexed winner,
+        uint256 indexed tokenId,
+        uint256 winningBid
+    );
+
+    event BidWithdrawn(
+        address indexed bidder,
+        uint256 indexed tokenId,
+        uint256 withdrawnAmount
+    );
+
+    event BidWithdrawnByOwner(
+        address indexed bidder,
+        uint256 indexed tokenId,
+        uint256 withdrawnAmount
+    );
+
     constructor(
         string memory _baseURI
     ) ERC721("Quantum Mad Labs", "QML") Ownable(msg.sender) {
@@ -140,5 +164,89 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard {
         newAuction.endTime = block.timestamp + _auctionDuration;
         safeTransferFrom(msg.sender, address(this), _tokenId);
         emit AuctionCreated(msg.sender, _tokenId, newAuction.endTime);
+    }
+
+    function bid(uint256 _tokenId) public payable nonReentrant {
+        Auction storage auction = auctions[_tokenId];
+        require(auction.isActive, "Auction is not active");
+        require(block.timestamp < auction.endTime, "Auction has ended");
+        require(
+            msg.value > auction.highestBid,
+            "Bid must be higher than the current highest bid"
+        );
+        if (auction.highestBidder != address(0)) {
+            auction.bids[auction.highestBidder] = auction.highestBid;
+        }
+        auction.highestBid = msg.value;
+        auction.highestBidder = payable(msg.sender);
+        if (!auction.isBidder[msg.sender]) {
+            auction.bidders.push(msg.sender);
+            auction.isBidder[msg.sender] = true;
+        }
+        emit BidPlaced(msg.sender, _tokenId, msg.value);
+    }
+
+    function getBidders(
+        uint256 _tokenId
+    ) public view returns (address[] memory) {
+        return auctions[_tokenId].bidders;
+    }
+
+    function endAuction(uint256 _tokenId) public nonReentrant {
+        Auction storage auction = auctions[_tokenId];
+        require(auction.isActive, "Auction is already ended");
+        auction.isActive = false;
+        if (auction.highestBidder != address(0)) {
+            safeTransferFrom(address(this), auction.highestBidder, _tokenId);
+            auction.seller.transfer(auction.highestBid);
+        } else {
+            safeTransferFrom(address(this), auction.seller, _tokenId);
+        }
+        emit AuctionEnded(auction.highestBidder, _tokenId, auction.highestBid);
+    }
+
+    function withdrawBid(uint256 _tokenId) public nonReentrant {
+        Auction storage auction = auctions[_tokenId];
+        uint256 amount = auction.bids[msg.sender];
+        require(amount > 0, "No funds to withdraw");
+        auction.bids[msg.sender] = 0;
+        payable(msg.sender).transfer(amount);
+        emit BidWithdrawn(msg.sender, _tokenId, amount);
+        for (uint256 i = 0; i < auction.bidders.length; i++) {
+            if (auction.bidders[i] == msg.sender) {
+                auction.bidders[i] = auction.bidders[
+                    auction.bidders.length - 1
+                ];
+                auction.bidders.pop();
+                break;
+            }
+        }
+        if (auction.bidders.length == 0) {
+            delete auction.bids[msg.sender];
+            _clearAuction(_tokenId);
+        }
+    }
+
+    function _clearAuction(uint256 _tokenId) internal {
+        Auction storage auction = auctions[_tokenId];
+        auction.highestBid = 0;
+        auction.highestBidder = payable(address(0));
+        auction.isActive = false;
+        for (uint256 i = 0; i < auction.bidders.length; i++) {
+            delete auction.bids[auction.bidders[i]];
+        }
+        delete auction.bidders;
+    }
+
+    function withdrawBidByOwner(
+        uint256 _tokenId,
+        address _bidder
+    ) public onlyOwner {
+        Auction storage auction = auctions[_tokenId];
+        uint256 amount = auction.bids[_bidder];
+        require(amount > 0, "No funds to withdraw");
+        auction.bids[_bidder] = 0;
+        payable(_bidder).transfer(amount);
+        emit BidWithdrawnByOwner(_bidder, _tokenId, amount);
     }
 }
