@@ -11,6 +11,7 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard {
     uint256 private totalNftSupply = 20;
     uint256 private tokenIdCounter;
     mapping(uint256 => string) private _tokenURIs;
+    mapping(uint256 => uint256) nftPrices;
 
     constructor(
         string memory _baseURI
@@ -46,5 +47,16 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard {
             "ERC721Metadata: URI query for nonexistent token"
         );
         return _tokenURIs[tokenId];
+    }
+
+    function setNftPrice(uint256 _tokenId, uint256 _nftPrice) public {
+        require(msg.sender == ownerOf(_tokenId), "You are not the NFT owner");
+        require(_nftPrice > 0, "Price must be greater than zero");
+        nftPrices[_tokenId] = _nftPrice * 1 ether;
+    }
+
+    function getNftPrice(uint256 _tokenId) public view returns (uint256) {
+        require(ownerOf(_tokenId) != address(0), "Token does not exist");
+        return nftPrices[_tokenId] / 1 ether;
     }
 }
