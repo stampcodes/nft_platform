@@ -191,7 +191,7 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard, IERC721Receiver {
             "Bid must be higher than the current highest bid"
         );
         if (auction.highestBidder != address(0)) {
-            auction.bids[auction.highestBidder] = auction.highestBid;
+            payable(auction.highestBidder).transfer(auction.highestBid);
         }
         auction.highestBid = msg.value;
         auction.highestBidder = payable(msg.sender);
@@ -216,16 +216,14 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard, IERC721Receiver {
         return auction.bids[_bidder];
     }
 
-    function endAuction(uint256 _tokenId) public nonReentrant {
+    function endAuction(uint256 _tokenId) public nonReentrant onlyOwner {
         Auction storage auction = auctions[_tokenId];
         require(auction.isActive, "Auction is already ended");
         auction.isActive = false;
         if (auction.highestBidder != address(0)) {
             auction.bids[auction.highestBidder] = 0;
-            safeTransferFrom(address(this), auction.highestBidder, _tokenId);
+            _transfer(address(this), auction.highestBidder, _tokenId);
             auction.seller.transfer(auction.highestBid);
-        } else {
-            safeTransferFrom(address(this), auction.seller, _tokenId);
         }
         emit AuctionEnded(auction.highestBidder, _tokenId, auction.highestBid);
     }
