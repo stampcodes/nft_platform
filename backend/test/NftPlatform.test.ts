@@ -49,10 +49,10 @@ describe("NftPlatform", function () {
     await nftPlatform.setNftPrice(1, parseEther("1"));
     await nftPlatform.setNftPrice(2, parseEther("2"));
 
-    const nftsForSale = await nftPlatform.getNftsForSale();
+    const [tokenIds] = await nftPlatform.getNftsForSaleWithDetails();
 
-    expect(nftsForSale).to.include(1n);
-    expect(nftsForSale).to.include(2n);
+    expect(tokenIds).to.include(1n);
+    expect(tokenIds).to.include(2n);
   });
 
   it("Should allow purchase of an NFT", async function () {
