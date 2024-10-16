@@ -117,23 +117,47 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard, IERC721Receiver {
         return nftPrices[_tokenId];
     }
 
-    function getNftsForSale() public view returns (uint256[] memory) {
+    function getNftDetails(
+        uint256 _tokenId
+    ) public view returns (uint256 tokenId, string memory uri, uint256 price) {
+        require(ownerOf(_tokenId) != address(0), "Token does not exist");
+        require(nftPrices[_tokenId] > 0, "NFT is not for sale");
+
+        return (_tokenId, _tokenURIs[_tokenId], nftPrices[_tokenId]);
+    }
+
+    function getNftsForSaleWithDetails()
+        public
+        view
+        returns (
+            uint256[] memory tokenIds,
+            string[] memory uris,
+            uint256[] memory prices
+        )
+    {
         uint256 totalMinted = tokenIdCounter;
         uint256 itemCount = 0;
-        for (uint256 i = 0; i <= totalMinted; i++) {
+
+        for (uint256 i = 1; i <= totalMinted; i++) {
             if (nftPrices[i] > 0) {
                 itemCount++;
             }
         }
-        uint256[] memory nftsForSale = new uint256[](itemCount);
+
+        tokenIds = new uint256[](itemCount);
+        uris = new string[](itemCount);
+        prices = new uint256[](itemCount);
+
         uint256 currentIndex = 0;
+
         for (uint256 i = 1; i <= totalMinted; i++) {
             if (nftPrices[i] > 0) {
-                nftsForSale[currentIndex] = i;
+                tokenIds[currentIndex] = i;
+                uris[currentIndex] = _tokenURIs[i];
+                prices[currentIndex] = nftPrices[i];
                 currentIndex++;
             }
         }
-        return nftsForSale;
     }
 
     function purchaseNft(uint256 _tokenId) public payable nonReentrant {
