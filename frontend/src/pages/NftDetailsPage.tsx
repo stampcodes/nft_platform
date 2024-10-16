@@ -1,5 +1,11 @@
+import Navbar from "../components/Navbar";
+
 const NftDetailsPage = () => {
-  return <div>NftDetailsPage</div>;
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 };
 
 export default NftDetailsPage;

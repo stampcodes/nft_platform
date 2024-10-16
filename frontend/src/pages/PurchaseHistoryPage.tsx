@@ -1,5 +1,11 @@
+import Navbar from "../components/Navbar";
+
 const PurchaseHistoryPage = () => {
-  return <div>PurchaseHistoryPage</div>;
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 };
 
 export default PurchaseHistoryPage;
