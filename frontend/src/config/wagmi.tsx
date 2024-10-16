@@ -30,8 +30,8 @@ createWeb3Modal({
   enableAnalytics: true,
   enableOnramp: true,
   themeVariables: {
-    "--w3m-accent": "#b7441a",
-    "--w3m-color-mix": "#b7441a",
+    "--w3m-accent": "#2c2c2c",
+    "--w3m-color-mix": "#01ef03",
     "--w3m-color-mix-strength": 30,
     "--w3m-font-family": "Poppins-Regular, sans-serif",
     "--w3m-font-size-master": "11px",
