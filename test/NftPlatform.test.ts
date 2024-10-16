@@ -144,7 +144,8 @@ describe("NftPlatform", function () {
     await nftPlatform.mintAllNFTs();
     const tokenId = 1;
     const nftPrice = ethers.parseEther("1");
-    await nftPlatform.setNftPrice(tokenId, 1);
+
+    await nftPlatform.setNftPrice(tokenId, nftPrice);
 
     await nftPlatform.connect(addr1).purchaseNft(tokenId, { value: nftPrice });
 
@@ -153,9 +154,24 @@ describe("NftPlatform", function () {
       .withArgs(addr1.address);
 
     const initialOwnerBalance = await ethers.provider.getBalance(owner.address);
+
+    const initialBalanceBigInt = BigInt(initialOwnerBalance.toString());
+
     await nftPlatform.connect(owner).withdraw();
+
     const finalOwnerBalance = await ethers.provider.getBalance(owner.address);
-    expect(finalOwnerBalance).to.be.gt(initialOwnerBalance);
+
+    const finalBalanceBigInt = BigInt(finalOwnerBalance.toString());
+
+    const gasCostEstimate = BigInt(ethers.parseEther("0.001").toString());
+
+    const expectedFinalBalance =
+      initialBalanceBigInt + BigInt(nftPrice.toString()) - gasCostEstimate;
+
+    expect(finalBalanceBigInt).to.be.closeTo(
+      expectedFinalBalance,
+      BigInt(ethers.parseEther("0.001").toString())
+    );
   });
 
   it("Should handle ending an auction with no bids", async function () {
