@@ -109,12 +109,12 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard, IERC721Receiver {
 
     function setNftPrice(uint256 _tokenId, uint256 _nftPrice) public onlyOwner {
         require(_nftPrice > 0, "Price must be greater than zero");
-        nftPrices[_tokenId] = _nftPrice * 1 ether;
+        nftPrices[_tokenId] = _nftPrice;
     }
 
     function getNftPrice(uint256 _tokenId) public view returns (uint256) {
         require(ownerOf(_tokenId) != address(0), "Token does not exist");
-        return nftPrices[_tokenId] / 1 ether;
+        return nftPrices[_tokenId];
     }
 
     function getNftsForSale() public view returns (uint256[] memory) {
