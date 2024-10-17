@@ -16,6 +16,11 @@
   font-weight: 800;
 }
 
+::selection {
+  background-color: #2c2c2c;
+  color: #ffffff;
+}
+
 .custumButton {
   background-color: #2c2c2c;
   font-weight: 800;
