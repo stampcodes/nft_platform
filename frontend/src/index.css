@@ -12,6 +12,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  color: #2c2c2c;
+  font-weight: 800;
 }
 
 .custumButton {
@@ -28,4 +30,20 @@
 
 .custumButton:hover {
   background-color: #414141;
+}
+
+.card {
+  transition: transform 0.5s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.LoadingIcon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
