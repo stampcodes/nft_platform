@@ -19,19 +19,11 @@ const useGetNftsForSaleWithDetails = () => {
     ? (nftsForSaleWithDetails as NftsForSaleWithDetails)
     : null;
 
-  const handleFetchDetails = async () => {
-    try {
-      await refetch();
-    } catch (e) {
-      console.error("Errore durante il refetch:", e);
-    }
-  };
-
   return {
     nftsForSaleWithDetails: parsedData,
     error,
     isPending,
-    handleFetchDetails,
+    refetch,
   };
 };
 
