@@ -38,7 +38,7 @@ const NftCard: React.FC<NftCardProps> = ({ tokenId, uri, price }) => {
       {metadata && (
         <>
           <NftImage imageUrl={metadata.image} />
-          <NftName name={metadata.name} tokenId={tokenId} />
+          <NftName name={metadata.name} />
           <NftPrice price={price} />
         </>
       )}
