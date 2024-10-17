@@ -52,3 +52,33 @@
   display: flex;
   justify-content: center;
 }
+
+.successfulPayment {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 12px;
+  background-color: #66bb6a;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.failedPayment {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 12px;
+  background-color: #ff6666;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.waitingPayment {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 12px;
+  background-color: #87ceeb;
+  margin-top: 10px;
+  text-align: center;
+}
