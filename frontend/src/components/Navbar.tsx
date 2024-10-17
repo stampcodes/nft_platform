@@ -30,15 +30,15 @@ const Navbar = () => {
           className="w-[170px] absolute left-[875px] top-0 "
         />
         {isInUserHistory || isInMarket ? (
-          <button className="custumButton" onClick={navigateToHome}>
+          <button className="customButton" onClick={navigateToHome}>
             Home
           </button>
         ) : (
           <div>
-            <button className="custumButton ml-5" onClick={navigateToMarket}>
+            <button className="customButton ml-5" onClick={navigateToMarket}>
               Marketplace
             </button>
-            <button className="custumButton ml-5" onClick={navigateToHistory}>
+            <button className="customButton ml-5" onClick={navigateToHistory}>
               History
             </button>
           </div>
