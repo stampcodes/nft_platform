@@ -7,14 +7,11 @@ import loading from "../assets/imgs/loading.gif";
 
 const NftDetailsPage = () => {
   const { tokenId } = useParams<{ tokenId: string }>();
-  console.log("Token ID:", tokenId);
 
   if (!tokenId) return <div>ID token not exist</div>;
   const { nftDetails, error, isPending, refetch } = useGetNftDetails(
     BigInt(tokenId)
   );
-
-  console.log("NFT Details:", nftDetails);
 
   useEffect(() => {
     refetch();

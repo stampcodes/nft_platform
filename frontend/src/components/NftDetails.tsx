@@ -11,7 +11,6 @@ const NftDetails: React.FC<NftDetailsProps> = ({ details }) => {
   const [metadata, setMetadata] = useState<any>(null);
 
   useEffect(() => {
-    console.log("Fetching metadata for URI:", uri);
     const fetchMetadata = async () => {
       try {
         const response = await fetch(
