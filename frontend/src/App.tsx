@@ -11,7 +11,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/market" element={<NftMarketplacePage />} />
-          <Route path="/market/:nftId" element={<NftDetailsPage />} />
+          <Route path="/market/:tokenId" element={<NftDetailsPage />} />
           <Route path="/user/history" element={<PurchaseHistoryPage />} />
         </Routes>
       </Router>
