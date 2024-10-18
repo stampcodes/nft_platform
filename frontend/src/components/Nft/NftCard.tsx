@@ -33,7 +33,7 @@ const NftCard: React.FC<NftCardProps> = ({ tokenId, uri, price }) => {
   return (
     <div
       onClick={handleCardClick}
-      className="border-none p-3 m-3 rounded-xl bg-[#01ef03] card "
+      className="border-none p-3 m-3 rounded-xl bg-[#00274d] card "
     >
       {metadata && (
         <>

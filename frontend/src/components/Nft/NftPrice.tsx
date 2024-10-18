@@ -7,7 +7,7 @@ type NftPriceProps = {
 
 const NftPrice: React.FC<NftPriceProps> = ({ price }) => {
   return (
-    <p className="mt-3 border-none bg-[#00bfff] rounded-lg flex justify-center ">
+    <p className=" mt-3 border-none bg-[#00bfff] rounded-lg flex justify-center ">
       Price: {ethers.formatEther(price)} ETH
     </p>
   );
