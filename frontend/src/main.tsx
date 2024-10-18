@@ -1,13 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { Web3ModalProvider } from "./config/wagmi.tsx";
+import { AppKitProvider } from "./config/wagmi.tsx";
 import App from "./App.tsx";
 import "./index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Web3ModalProvider>
+    <AppKitProvider>
       <App />
-    </Web3ModalProvider>
+    </AppKitProvider>
   </StrictMode>
 );
