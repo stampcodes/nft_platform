@@ -1,6 +1,6 @@
 import usePurchaseNft from "../hooks/usePurchaseNft";
 import { useAccount } from "wagmi";
-import { useWeb3Modal } from "@web3modal/wagmi/react";
+import { useAppKit } from "@reown/appkit/react";
 
 type PurchaseButtonProps = {
   tokenId: bigint;
@@ -9,7 +9,7 @@ type PurchaseButtonProps = {
 
 const PurchaseButton: React.FC<PurchaseButtonProps> = ({ tokenId, price }) => {
   const { address } = useAccount();
-  const { open } = useWeb3Modal();
+  const { open } = useAppKit();
 
   const { handlePurchaseNft, error, isPending, isConfirming, isConfirmed } =
     usePurchaseNft(tokenId, price);
