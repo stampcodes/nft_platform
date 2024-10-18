@@ -1,9 +1,9 @@
-import { createWeb3Modal } from "@web3modal/wagmi/react";
-import { defaultWagmiConfig } from "@web3modal/wagmi/react/config";
 import { ReactNode } from "react";
 import { WagmiProvider } from "wagmi";
-import { sepolia } from "viem/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { createAppKit } from "@reown/appkit/react";
+import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
+import { mainnet, sepolia } from "@reown/appkit/networks";
 
 const queryClient = new QueryClient();
 
@@ -12,23 +12,26 @@ const projectId =
 
 const metadata = {
   name: "Quantum Mad Labs",
-  description: "AppKit Example",
-  url: "https://web3modal.com",
-  icons: ["https://avatars.githubusercontent.com/u/37784886"],
+  description: "Quantum Mad Labs",
+  url: "https://reown.com/appkit",
+  icons: ["https://assets.reown.com/reown-profile-pic.png"],
 };
 
-const chains = [sepolia] as const;
-const config = defaultWagmiConfig({
-  chains,
+const networks = [sepolia, mainnet];
+const wagmiAdapter = new WagmiAdapter({
+  networks,
   projectId,
-  metadata,
+  ssr: true,
 });
 
-createWeb3Modal({
-  wagmiConfig: config,
+createAppKit({
+  adapters: [wagmiAdapter],
+  networks: [sepolia, mainnet],
   projectId,
-  enableAnalytics: true,
-  enableOnramp: true,
+  metadata,
+  features: {
+    analytics: true,
+  },
   themeVariables: {
     "--w3m-accent": "#2c2c2c",
     "--w3m-color-mix": "#01ef03",
@@ -39,13 +42,13 @@ createWeb3Modal({
   },
 });
 
-interface Web3ModalProviderProps {
+interface AppKitProviderProps {
   children: ReactNode;
 }
 
-export function Web3ModalProvider({ children }: Web3ModalProviderProps) {
+export function AppKitProvider({ children }: AppKitProviderProps) {
   return (
-    <WagmiProvider config={config}>
+    <WagmiProvider config={wagmiAdapter.wagmiConfig}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
   );
