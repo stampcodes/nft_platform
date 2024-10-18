@@ -1,4 +1,4 @@
-import NFTCard from "./nft/NftCard";
+import NftCard from "./nft/NftCard";
 
 type NftSaleListProps = {
   nfts: [bigint[], string[], bigint[]];
@@ -11,7 +11,7 @@ const NftSaleList: React.FC<NftSaleListProps> = ({ nfts }) => {
       <div className="w-full flex justify-center mt-4 ">
         <div className="grid grid-cols-4 gap-1 max-w-screen-lg">
           {tokenIds.map((tokenId, index) => (
-            <NFTCard
+            <NftCard
               key={tokenId.toString()}
               tokenId={tokenId}
               uri={uris[index]}
