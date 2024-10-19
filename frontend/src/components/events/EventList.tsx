@@ -34,18 +34,23 @@ const EventList: React.FC<EventListProps> = ({ events }) => {
   }
 
   return (
-    <>
-      {filteredEvents.map((event) => (
-        <EventCard
-          key={event.tokenId}
-          buyer={event.buyer}
-          seller={event.seller}
-          tokenId={event.tokenId}
-          price={event.price}
-          transactionHash={event.transactionHash}
-        />
-      ))}
-    </>
+    <div className="bgLab">
+      <h2 className="text-4xl sm:text-3xl md:text-4xl font-bold text-center text-white bg-[#2c2c2c] p-5">
+        Purchase History
+      </h2>
+      <div className="space-y-6 py-5 max-w-2xl mx-auto">
+        {filteredEvents.map((event) => (
+          <EventCard
+            key={event.tokenId}
+            buyer={event.buyer}
+            seller={event.seller}
+            tokenId={event.tokenId}
+            price={event.price}
+            transactionHash={event.transactionHash}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 

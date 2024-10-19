@@ -78,7 +78,8 @@ body:hover::before {
 
 .bgLab {
   background-image: url("./assets/imgs/lab.png");
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
   background-size: cover;
   background-position: center;
 }
