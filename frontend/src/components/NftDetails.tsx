@@ -34,22 +34,31 @@ const NftDetails: React.FC<NftDetailsProps> = ({ details }) => {
 
   return (
     <>
-      <div className="bg-gradient-to-b from-[#e0f7fa] to-[#f0f4f8] min-h-screen w-full py-10">
-        <div className="flex justify-center">
-          <div className="flex justify-around items-center  w-[1100px] mt-5 ">
-            <img
-              src={httpImageUrl}
-              alt="NFT Image"
-              width="512"
-              className="rounded-xl"
-            />
-            <div className="flex flex-col justify-center items-start ml-5">
-              <p className=" text-4xl mb-10"> {metadata?.name}</p>
-              <p className="mb-5">{metadata?.description}</p>
-              <p className=" text-4xl ">
-                Price: {ethers.formatEther(price)} ETH
-              </p>
-              <PurchaseButton tokenId={tokenId} price={price} />
+      <div className="bgLab">
+        <h2 className="text-4xl font-bold text-center  text-white bg-[#2c2c2c] p-5 ">
+          NFT Details
+        </h2>
+        <div className=" flex justify-center items-start">
+          <div className="flex justify-center items-center  p-5 w-[55%] rounded-xl bg-[#00274d] mt-5 ">
+            <div className="flex justify-around items-center w-[1100px] ">
+              <img
+                src={httpImageUrl}
+                alt="NFT Image"
+                width="512"
+                className="rounded-xl"
+              />
+              <div className="flex flex-col justify-center items-start ml-5 ">
+                <p className=" text-4xl mb-10 text-white"> {metadata?.name}</p>
+                <p className="mb-5 text-white">{metadata?.description}</p>
+                <p className=" text-4xl text-white">
+                  Price :{" "}
+                  <span className="text-[#00bfff]">
+                    {" "}
+                    {ethers.formatEther(price)} ETH{" "}
+                  </span>
+                </p>
+                <PurchaseButton tokenId={tokenId} price={price} />
+              </div>
             </div>
           </div>
         </div>

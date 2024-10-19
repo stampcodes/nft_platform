@@ -29,7 +29,7 @@ const PurchaseButton: React.FC<PurchaseButtonProps> = ({ tokenId, price }) => {
           className="customButton mt-5"
           onClick={handleClick}
         >
-          {isPending ? "Confirming..." : "Purchase the NFT"}
+          {isPending ? "Confirming..." : "Purchase NFT"}
         </button>
       )}
 

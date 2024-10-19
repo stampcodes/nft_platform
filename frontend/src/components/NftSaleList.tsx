@@ -7,7 +7,10 @@ type NftSaleListProps = {
 const NftSaleList: React.FC<NftSaleListProps> = ({ nfts }) => {
   const [tokenIds, uris, prices] = nfts;
   return (
-    <div className="bg-gradient-to-b from-[#e0f7fa] to-[#f0f4f8] min-h-screen w-full py-10">
+    <div className="bgLab">
+      <h2 className="text-4xl font-bold text-center  text-white bg-[#2c2c2c] p-5">
+        Marketplace
+      </h2>
       <div className="w-full flex justify-center mt-4 ">
         <div className="grid grid-cols-4 gap-1 max-w-screen-lg">
           {tokenIds.map((tokenId, index) => (

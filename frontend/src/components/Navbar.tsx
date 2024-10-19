@@ -23,7 +23,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="border-b-2 flex justify-around items-center h-[175px]">
+      <nav className="flex justify-around items-center h-[175px]">
         <img
           src={logo}
           alt="Logo"

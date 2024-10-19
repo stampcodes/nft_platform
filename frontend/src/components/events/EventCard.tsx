@@ -16,12 +16,12 @@ const EventCard: React.FC<EventCardProps> = ({
   const etherscanUrl = `https://sepolia.etherscan.io/tx/${transactionHash}`;
 
   return (
-    <div className="bg-gradient-to-b from-[#e0f7fa] to-[#f0f4f8] min-h-screen w-full py-10">
-      <h2 className="text-3xl font-bold text-center mb-6 text-[#00bfff]">
+    <div className="bgLab">
+      <h2 className=" font-bold text-center  text-white bg-[#2c2c2c] p-5 text-4xl">
         Purchase History
       </h2>
       <div className="flex justify-center py-10">
-        <div className="bg-[#00274d] text-white rounded-xl shadow-lg max-w-2xl w-full p-10 border border-gray-300">
+        <div className="bg-[#00274d] text-white rounded-xl shadow-lg max-w-2xl w-full p-10">
           <div className="space-y-6">
             <div className="flex justify-between">
               <span className="font-semibold text-white ">Buyer:</span>

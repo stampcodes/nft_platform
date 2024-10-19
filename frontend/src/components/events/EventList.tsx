@@ -22,6 +22,17 @@ const EventList: React.FC<EventListProps> = ({ events }) => {
     }
   }, [address, events]);
 
+  if (!address) {
+    return (
+      <div className=" h-[100vh] flex justify-center  bgLab">
+        <span className="text-white bg-[#2c2c2c] rounded-xl h-fit p-5 mt-5  text-4xl">
+          {" "}
+          No wallet connected
+        </span>
+      </div>
+    );
+  }
+
   return (
     <>
       {filteredEvents.map((event) => (

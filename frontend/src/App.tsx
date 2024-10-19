@@ -3,8 +3,21 @@ import HomePage from "./pages/HomePage";
 import NftMarketplacePage from "./pages/NftMarketplacePage";
 import NftDetailsPage from "./pages/NftDetailsPage";
 import PurchaseHistoryPage from "./pages/PurchaseHistoryPage";
+import { useEffect } from "react";
 
 const App = () => {
+  const handleMouseMove = (e: any) => {
+    const x = `${e.clientX}px`;
+    const y = `${e.clientY}px`;
+    document.documentElement.style.setProperty("--x", x);
+    document.documentElement.style.setProperty("--y", y);
+  };
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
   return (
     <>
       <Router>
