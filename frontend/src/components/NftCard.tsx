@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import NftName from "./nft/NftName";
-import NftImage from "./nft/NftImage";
-import NftPrice from "./nft/NftPrice";
+import NftName from "./NftName";
+import NftImage from "./NftImage";
+import NftPrice from "./NftPrice";
 import { useNavigate } from "react-router-dom";
 
 type NftCardProps = {
