@@ -1,4 +1,4 @@
-# Quantum Mad Labs NFT Platform
+# Quantum Mad Labs NFT Backend
 
 **Quantum Mad Labs** is a platform for creating and selling NFTs, with the ability to launch auctions for the NFTs themselves. The contract is written in Solidity and deployed on the Ethereum network (Sepolia) using Hardhat and Ignition for deployment. This project allows users to purchase pre-minted NFTs, participate in auctions for these NFTs, and view details about the available NFTs.
 
@@ -43,13 +43,13 @@ NFTs can either be purchased directly if listed for sale or acquired through auc
 2. Navigate to the project directory:
 
 ```bash
-cd nft_platform
+cd nft_platform/backend
 ```
 
 3. Install the dependencies:
 
 ```bash
-npm install
+yarn
 ```
 
 4. Set up the .env file with your private key and the Sepolia network endpoint.
@@ -57,19 +57,19 @@ npm install
 5. Compile the contract:
 
 ```bash
-npx hardhat compile
+yarn hardhat compile
 ```
 
 6. Run tests to verify that everything works correctly:
 
 ```bash
-npx hardhat test
+yarn hardhat test
 ```
 
 7. Deploy the contract on Sepolia using Ignition:
 
 ```bash
-npx hardhat ignition deploy ignition/modules/NftPlatformModule.ts --network sepolia
+yarn hardhat ignition deploy ignition/modules/NftPlatformModule.ts --network sepolia
 ```
 
 ## Deployment
