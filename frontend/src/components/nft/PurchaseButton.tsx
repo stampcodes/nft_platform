@@ -1,4 +1,4 @@
-import usePurchaseNft from "../hooks/usePurchaseNft";
+import usePurchaseNft from "../../hooks/usePurchaseNft";
 import { useAccount } from "wagmi";
 import { useAppKit } from "@reown/appkit/react";
 

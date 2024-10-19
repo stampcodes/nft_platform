@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Navbar from "../components/Navbar";
-import NftDetails from "../components/NftDetails";
+import NftDetails from "../components/nft/NftDetails";
 import useGetNftDetails from "../hooks/useGetNftDetails";
 import { useParams } from "react-router-dom";
 import loading from "../assets/imgs/loading.gif";

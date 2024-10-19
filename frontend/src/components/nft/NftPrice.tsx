@@ -1,4 +1,3 @@
-// NFTPrice.tsx
 import { ethers } from "ethers";
 
 type NftPriceProps = {

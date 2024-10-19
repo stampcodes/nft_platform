@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Navbar from "../components/Navbar";
-import NftSaleList from "../components/NftSaleList";
+import NftSaleList from "../components/nft/NftSaleList";
 import useGetNftsForSaleWithDetails from "../hooks/useGetNftsForSaleWithDetails";
 import loading from "../assets/imgs/loading.gif";
 
