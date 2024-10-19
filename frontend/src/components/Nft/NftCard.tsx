@@ -9,9 +9,13 @@ type NftCardProps = {
   uri: string;
   price: bigint;
 };
+interface NftMetadata {
+  image: string;
+  name: string;
+}
 
 const NftCard: React.FC<NftCardProps> = ({ tokenId, uri, price }) => {
-  const [metadata, setMetadata] = useState<any>(null);
+  const [metadata, setMetadata] = useState<NftMetadata | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
