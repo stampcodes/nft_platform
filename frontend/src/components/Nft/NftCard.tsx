@@ -20,11 +20,18 @@ const NftCard: React.FC<NftCardProps> = ({ tokenId, uri, price }) => {
 
   useEffect(() => {
     const fetchMetadata = async () => {
-      const response = await fetch(
-        uri.replace("ipfs://", "https://ipfs.io/ipfs/")
-      );
-      const data = await response.json();
-      setMetadata(data);
+      try {
+        const response = await fetch(
+          uri.replace("ipfs://", "https://ipfs.io/ipfs/")
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch metadata");
+        }
+        const data = await response.json();
+        setMetadata(data);
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     fetchMetadata();
