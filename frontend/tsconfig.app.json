@@ -10,7 +10,8 @@
 
     "baseUrl": "./src",
     "paths": {
-      "*": ["*"]
+      "components/*": ["components/*"],
+      "nft/*": ["components/nft/*"]
     },
 
     /* Bundler mode */
