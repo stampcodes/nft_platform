@@ -66,13 +66,15 @@ cd nft_platform/frontend
 yarn
 ```
 
-4. Start the development server:
+4. Set up the .env file
+
+5. Start the development server:
 
 ```bash
 yarn dev
 ```
 
-5. Open the app in your browser at http://localhost:5173/
+6. Open the app in your browser at http://localhost:5173/
 
 ## License
 
