@@ -12,6 +12,7 @@ export interface NftPurchasedEvent {
 
 const useNftPurchasedEvent = () => {
   const [events, setEvents] = useState<NftPurchasedEvent[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const contractAddress = "0xbafC37EB206eA296Ff751Ac9C9351BeD393eF6Dd";
 
   useEffect(() => {
@@ -24,6 +25,7 @@ const useNftPurchasedEvent = () => {
 
     const fetchPastEvents = async () => {
       try {
+        setIsLoading(true);
         const filter = contract.filters.NFTPurchased();
         const events = await contract.queryFilter(filter, 0, "latest");
 
@@ -52,13 +54,15 @@ const useNftPurchasedEvent = () => {
         setEvents(decodedEvents);
       } catch (error) {
         console.error("Error fetching events:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchPastEvents();
   }, []);
 
-  return { events };
+  return { events, isLoading };
 };
 
 export default useNftPurchasedEvent;
