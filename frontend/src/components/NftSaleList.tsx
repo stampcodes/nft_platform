@@ -1,4 +1,4 @@
-import NftCard from "./nft/NftCard";
+import NftCard from "./nft/NftCard.tsx";
 
 type NftSaleListProps = {
   nfts: [bigint[], string[], bigint[]];
