@@ -27,8 +27,7 @@ const Navbar = () => {
         <div className="flex justify-start w-full sm:w-auto mb-4 sm:mb-0">
           {isInUserHistory || isInMarket ? (
             <button
-              style={{ paddingLeft: "40px", paddingRight: "40px" }}
-              className="customButton mt-2 sm:mt-0 sm:ml-5 px-6 sm:px-10"
+              className="customButton mt-2 sm:mt-0 sm:ml-5 px-6 sm:px-5"
               onClick={navigateToHome}
             >
               Home
@@ -36,13 +35,13 @@ const Navbar = () => {
           ) : (
             <>
               <button
-                className="customButton mt-2 sm:mt-0 sm:ml-5 px-6 sm:px-10"
+                className="customButton mt-2 sm:mt-0 sm:ml-5 sm:px-5 mr-2"
                 onClick={navigateToMarket}
               >
                 Marketplace
               </button>
               <button
-                className="customButton mt-2 sm:mt-0 sm:ml-5 px-6 sm:px-10"
+                className="customButton mt-2 sm:mt-0 sm:ml-5 px-6 sm:px-5"
                 onClick={navigateToHistory}
               >
                 History
@@ -51,7 +50,8 @@ const Navbar = () => {
           )}
         </div>
 
-        <div className="flex justify-center w-full sm:w-auto">
+        {/* Logo con classi responsive */}
+        <div className="flex justify-center w-full sm:w-auto lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2">
           <img
             src={logo}
             alt="Logo"
