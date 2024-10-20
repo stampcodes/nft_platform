@@ -8,7 +8,7 @@ const NftSaleList: React.FC<NftSaleListProps> = ({ nfts }) => {
   const [tokenIds, uris, prices] = nfts;
   return (
     <div className="bgLab">
-      <h2 className="text-4xl font-bold text-center text-white bg-[#2c2c2c] p-5">
+      <h2 className="VT323 text-4xl font-bold text-center text-white bg-[#2c2c2c] p-5">
         Marketplace
       </h2>
       <div className="w-full flex justify-center mt-4">

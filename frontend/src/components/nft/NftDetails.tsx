@@ -35,7 +35,7 @@ const NftDetails: React.FC<NftDetailsProps> = ({ details }) => {
   return (
     <>
       <div className="bgLab">
-        <h2 className="text-4xl sm:text-3xl md:text-4xl font-bold text-center text-white bg-[#2c2c2c] p-5">
+        <h2 className="VT323 text-4xl font-bold text-center text-white bg-[#2c2c2c] p-5">
           NFT Details
         </h2>
         <div className="flex justify-center items-start">

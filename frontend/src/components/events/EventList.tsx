@@ -25,7 +25,7 @@ const EventList: React.FC<EventListProps> = ({ events }) => {
   if (!address) {
     return (
       <div className=" h-[100vh] flex justify-center  bgLab">
-        <span className="text-white bg-[#2c2c2c] rounded-xl h-fit p-5 mt-5  text-4xl">
+        <span className="VT323 text-white bg-[#2c2c2c] rounded-xl h-fit p-5 mt-5  text-4xl">
           {" "}
           No wallet connected
         </span>
@@ -35,7 +35,7 @@ const EventList: React.FC<EventListProps> = ({ events }) => {
 
   return (
     <div className="bgLab">
-      <h2 className="text-4xl sm:text-3xl md:text-4xl font-bold text-center text-white bg-[#2c2c2c] p-5">
+      <h2 className="VT323 text-4xl font-bold text-center text-white bg-[#2c2c2c] p-5">
         Purchase History
       </h2>
       <div className="space-y-6 py-5 max-w-2xl mx-auto">

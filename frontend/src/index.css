@@ -7,6 +7,11 @@
   src: url("./assets/fonts/Poppins-Regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "VT323";
+  src: url("./assets/fonts/VT323-Regular.ttf") format("truetype");
+}
+
 * {
   font-family: "Poppins-Regular", sans-serif;
   box-sizing: border-box;
@@ -14,6 +19,11 @@
   padding: 0;
   color: #2c2c2c;
   font-weight: 800;
+}
+
+.VT323 {
+  font-family: "VT323", sans-serif;
+  font-size: 50px;
 }
 
 body {
