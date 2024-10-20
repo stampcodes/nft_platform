@@ -2,7 +2,7 @@
 
 This is the frontend for **Quantum Mad Labs NFT**. You can visit the deployed site at the link below:
 
-- [Deployed Site]()
+- [Quantum Mad Labs Website](https://quantum-mad-labs.vercel.app/)
 
 ## Additional Documentation
 
