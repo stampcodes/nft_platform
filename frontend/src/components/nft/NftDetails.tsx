@@ -14,7 +14,7 @@ const NftDetails: React.FC<NftDetailsProps> = ({ details }) => {
     const fetchMetadata = async () => {
       try {
         const response = await fetch(
-          uri.replace("ipfs://", "https://ipfs.io/ipfs/")
+          uri.replace("ipfs://", "https://dweb.link/ipfs/")
         );
         const data = await response.json();
 
@@ -29,7 +29,7 @@ const NftDetails: React.FC<NftDetailsProps> = ({ details }) => {
 
   const httpImageUrl = metadata?.image?.replace(
     "ipfs://",
-    "https://ipfs.io/ipfs/"
+    "https://dweb.link/ipfs/"
   );
 
   return (

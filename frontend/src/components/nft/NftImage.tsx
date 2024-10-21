@@ -3,7 +3,7 @@ type NftImageProps = {
 };
 
 const NftImage: React.FC<NftImageProps> = ({ imageUrl }) => {
-  const httpImageUrl = imageUrl.replace("ipfs://", "https://ipfs.io/ipfs/");
+  const httpImageUrl = imageUrl.replace("ipfs://", "https://dweb.link/ipfs/");
 
   if (!httpImageUrl) {
     return <p>Immagine non disponibile</p>;
