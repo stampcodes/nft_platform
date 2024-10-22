@@ -2,6 +2,7 @@ import EventList from "../components/events/EventList";
 import Navbar from "../components/Navbar";
 import useNftPurchasedEvent from "../hooks/useNftPurchasedEvent";
 import loading from "../assets/imgs/loading.gif";
+import { Helmet } from "react-helmet-async";
 
 const PurchaseHistoryPage = () => {
   const { events, isLoading } = useNftPurchasedEvent();
@@ -15,6 +16,9 @@ const PurchaseHistoryPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Quantum Mad Labs - History</title>
+      </Helmet>
       <Navbar />
       <EventList events={events} />
     </>

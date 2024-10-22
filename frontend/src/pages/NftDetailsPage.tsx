@@ -4,6 +4,7 @@ import NftDetails from "../components/nft/NftDetails";
 import useGetNftDetails from "../hooks/useGetNftDetails";
 import { useParams } from "react-router-dom";
 import loading from "../assets/imgs/loading.gif";
+import { Helmet } from "react-helmet-async";
 
 const NftDetailsPage = () => {
   const { tokenId } = useParams<{ tokenId: string }>();
@@ -28,6 +29,9 @@ const NftDetailsPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Quantum Mad Labs - Details</title>
+      </Helmet>
       <Navbar />
       <NftDetails details={nftDetails} />
     </>

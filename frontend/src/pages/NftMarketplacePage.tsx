@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import NftSaleList from "../components/nft/NftSaleList";
 import useGetNftsForSaleWithDetails from "../hooks/useGetNftsForSaleWithDetails";
 import loading from "../assets/imgs/loading.gif";
+import { Helmet } from "react-helmet-async";
 
 const NftMarketplacePage = () => {
   const { nftsForSaleWithDetails, isPending, error, refetch } =
@@ -23,6 +24,9 @@ const NftMarketplacePage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Quantum Mad Labs - Market</title>
+      </Helmet>
       <Navbar />
       <NftSaleList nfts={nftsForSaleWithDetails} />
     </>
