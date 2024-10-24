@@ -7,18 +7,9 @@ const Navbar = () => {
 
   const isInUserHistory = location.pathname === "/user/history";
   const isInMarket = location.pathname === "/market";
-  // const isInMarketNFT = location.pathname.startsWith("/market/");
 
-  const navigateToMarket = () => {
-    navigate("/market");
-  };
-
-  const navigateToHistory = () => {
-    navigate("/user/history");
-  };
-
-  const navigateToHome = () => {
-    navigate("/");
+  const navigateTo = (path: string) => {
+    navigate(path);
   };
 
   return (
@@ -28,7 +19,7 @@ const Navbar = () => {
           {isInUserHistory || isInMarket ? (
             <button
               className="customButton mt-2 sm:mt-0 sm:ml-5 px-6 sm:px-5"
-              onClick={navigateToHome}
+              onClick={() => navigateTo("/")}
             >
               Home
             </button>
@@ -36,13 +27,13 @@ const Navbar = () => {
             <>
               <button
                 className="customButton mt-2 sm:mt-0 sm:ml-5 sm:px-5 mr-2"
-                onClick={navigateToMarket}
+                onClick={() => navigateTo("/market")}
               >
                 Marketplace
               </button>
               <button
                 className="customButton mt-2 sm:mt-0 sm:ml-5 px-6 sm:px-5"
-                onClick={navigateToHistory}
+                onClick={() => navigateTo("/user/history")}
               >
                 History
               </button>
@@ -50,7 +41,6 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Logo con classi responsive */}
         <div className="flex justify-center w-full sm:w-auto lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2">
           <img
             src={logo}
