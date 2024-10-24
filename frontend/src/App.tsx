@@ -6,7 +6,7 @@ import PurchaseHistoryPage from "./pages/PurchaseHistoryPage";
 import { useEffect } from "react";
 
 const App = () => {
-  const handleMouseMove = (e: any) => {
+  const handleMouseMove = (e: MouseEvent) => {
     const x = `${e.clientX}px`;
     const y = `${e.clientY}px`;
     document.documentElement.style.setProperty("--x", x);
