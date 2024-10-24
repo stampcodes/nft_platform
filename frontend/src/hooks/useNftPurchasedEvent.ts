@@ -13,7 +13,7 @@ export interface NftPurchasedEvent {
 const useNftPurchasedEvent = () => {
   const [events, setEvents] = useState<NftPurchasedEvent[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const contractAddress = "0xbafC37EB206eA296Ff751Ac9C9351BeD393eF6Dd";
+  const contractAddress = "0xEA6f144F17642cb56aea505C7Eaa8CF04B65C480";
 
   useEffect(() => {
     const provider = new WebSocketProvider(

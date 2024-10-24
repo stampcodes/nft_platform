@@ -10,7 +10,7 @@ const useGetNftsForSaleWithDetails = () => {
     isFetching: isPending,
     refetch,
   } = useReadContract({
-    address: "0xbafC37EB206eA296Ff751Ac9C9351BeD393eF6Dd",
+    address: "0xEA6f144F17642cb56aea505C7Eaa8CF04B65C480",
     abi: contractAbi.abi,
     functionName: "getNftsForSaleWithDetails",
   });
