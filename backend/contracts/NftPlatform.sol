@@ -82,9 +82,10 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard, IERC721Receiver {
     }
 
     function mintAllNFTs() public onlyOwner {
+        uint256 tempTokenIdCounter = tokenIdCounter;
         for (uint256 i = 0; i < totalNftSupply; i++) {
-            tokenIdCounter++;
-            uint256 currentTokenId = tokenIdCounter;
+            tempTokenIdCounter++;
+            uint256 currentTokenId = tempTokenIdCounter;
             _safeMint(address(this), currentTokenId);
             string memory newTokenURI = string(
                 abi.encodePacked(
@@ -95,6 +96,7 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard, IERC721Receiver {
             );
             _tokenURIs[currentTokenId] = newTokenURI;
         }
+        tokenIdCounter = tempTokenIdCounter;
     }
 
     function tokenURI(
@@ -143,18 +145,17 @@ contract NftPlatform is ERC721, Ownable, ReentrancyGuard, IERC721Receiver {
                 itemCount++;
             }
         }
-
         tokenIds = new uint256[](itemCount);
         uris = new string[](itemCount);
         prices = new uint256[](itemCount);
 
         uint256 currentIndex = 0;
-
         for (uint256 i = 1; i <= totalMinted; i++) {
-            if (nftPrices[i] > 0) {
+            uint256 price = nftPrices[i];
+            if (price > 0) {
                 tokenIds[currentIndex] = i;
                 uris[currentIndex] = _tokenURIs[i];
-                prices[currentIndex] = nftPrices[i];
+                prices[currentIndex] = price;
                 currentIndex++;
             }
         }
