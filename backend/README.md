@@ -30,7 +30,7 @@ NFTs can either be purchased directly if listed for sale or acquired through auc
 
 ## Smart Contract Addresses
 
-- **QuantumMadLabsNFT**: `0xbafC37EB206eA296Ff751Ac9C9351BeD393eF6Dd`
+- **QuantumMadLabsNFT**: `0xEA6f144F17642cb56aea505C7Eaa8CF04B65C480`
 
 ## How to Use
 
