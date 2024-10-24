@@ -8,21 +8,21 @@ type EventListProps = {
 };
 
 const EventList: React.FC<EventListProps> = ({ events }) => {
-  const { address } = useAccount();
+  const { address, isConnected } = useAccount();
   const [filteredEvents, setFilteredEvents] = useState<NftPurchasedEvent[]>([]);
 
   useEffect(() => {
-    if (address) {
+    if (isConnected && address) {
       const filtered = events.filter(
         (event) =>
-          event.buyer.toLowerCase() == address.toLowerCase() ||
-          event.seller.toLowerCase() == address.toLowerCase()
+          event.buyer.toLowerCase() === address.toLowerCase() ||
+          event.seller.toLowerCase() === address.toLowerCase()
       );
       setFilteredEvents(filtered);
     }
-  }, [address, events]);
+  }, [isConnected, address, events]);
 
-  if (!address) {
+  if (!isConnected) {
     return (
       <div className=" h-[100vh] flex justify-center  bgLab">
         <span className="VT323 text-white bg-[#2c2c2c] rounded-xl h-fit p-5 mt-5  text-4xl">
