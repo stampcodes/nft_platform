@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import PurchaseButton from "./PurchaseButton";
-import loading from "../../assets/imgs/loading.gif";
+import colorLoading from "../../assets/imgs/colorLoading.gif";
 
 type NftDetailsProps = {
   details: [bigint, string, bigint];
@@ -47,7 +47,11 @@ const NftDetails: React.FC<NftDetailsProps> = ({ details }) => {
           <div className="flex flex-col md:flex-row justify-center items-center p-5 w-[95%] md:w-[80%] lg:w-[65%] xl:w-[60%] 2xl:w-[55%] rounded-xl bg-[#00274d] mt-5">
             {isLoading ? (
               <div className="LoadingIcon">
-                <img src={loading} alt="Loading..." className="rounded-xl" />
+                <img
+                  src={colorLoading}
+                  alt="Loading..."
+                  className="rounded-xl"
+                />
               </div>
             ) : (
               metadata && (

@@ -3,7 +3,7 @@ import NftName from "./NftName";
 import NftImage from "./NftImage";
 import NftPrice from "./NftPrice";
 import { useNavigate } from "react-router-dom";
-import loading from "../../assets/imgs/loading.gif";
+import colorLoading from "../../assets/imgs/colorLoading.gif";
 
 type NftCardProps = {
   tokenId: bigint;
@@ -53,7 +53,7 @@ const NftCard: React.FC<NftCardProps> = ({ tokenId, uri, price }) => {
     >
       {isLoading ? (
         <div className="LoadingIcon ">
-          <img className="rounded-xl" src={loading} alt="loading..." />
+          <img className="rounded-xl" src={colorLoading} alt="loading..." />
         </div>
       ) : (
         metadata && (
