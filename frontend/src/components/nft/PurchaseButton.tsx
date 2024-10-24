@@ -2,6 +2,7 @@ import usePurchaseNft from "../../hooks/usePurchaseNft";
 import { useAccount } from "wagmi";
 import { useAppKit } from "@reown/appkit/react";
 import { useEffect, useState } from "react";
+import colorLoading from "../../assets/imgs/colorLoading.gif";
 
 type PurchaseButtonProps = {
   tokenId: bigint;
@@ -48,8 +49,12 @@ const PurchaseButton: React.FC<PurchaseButtonProps> = ({ tokenId, price }) => {
         <p className="failedPayment">Payment failed. Please try again.</p>
       )}
       {isConfirming && (
-        <div className="waitingPayment">
-          Transaction submitted. Waiting for confirmation...
+        <div>
+          <img
+            src={colorLoading}
+            alt="Loading..."
+            className="rounded-xl w-[70px] mt-5"
+          />
         </div>
       )}
       {isConfirmed && (
