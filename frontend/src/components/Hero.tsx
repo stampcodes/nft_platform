@@ -16,7 +16,11 @@ const Hero = () => {
           </h2>
         </div>
         <div className="flex flex-col justify-center items-center p-5 w-[95%] md:w-[80%] lg:w-[65%] xl:w-[60%] 2xl:w-[55%] rounded-xl bg-[#00274d] mt-5">
-          <img src={heroImg} alt="NFT Collection" className="rounded-xl mb-5" />{" "}
+          <img
+            src={heroImg}
+            alt="NFT Collection"
+            className="rounded-xl mb-5 w-[100%] "
+          />{" "}
           <button className="customButton" onClick={navigateToMarket}>
             Step Into the Lab!
           </button>
